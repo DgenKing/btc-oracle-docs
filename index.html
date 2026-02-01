@@ -6,25 +6,35 @@
     <title>BTC Oracle Terminal | User Guide</title>
     <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
     <style>
-        :root {
-            --global-font-size: 15px;
-            --page-width: 800px;
-        }
-        body { padding: 20px; max-width: var(--page-width); margin: auto; line-height: 1.6; }
-        #logo { color: #15f4ee; text-shadow: 0 0 8px #15f4ee; font-weight: bold; }
-        .terminal-card { border: 1px solid #444; padding: 20px; margin: 20px 0; border-radius: 5px; }
-        code { background: #222; color: #ffca28; padding: 2px 5px; border-radius: 3px; font-family: 'Courier New', Courier, monospace; }
-        h2, h3 { color: #15f4ee; border-bottom: 1px dashed #444; padding-bottom: 5px; }
-        .rule-box { border-left: 4px solid #ff5252; padding-left: 15px; background: rgba(255, 82, 82, 0.1); }
-        strong { color: #fff; }
-        ul { list-style-type: "— "; }
-        code { 
-    background: transparent; 
-    color: #15f4ee; 
-    border: 1px solid #444; 
-    padding: 2px 5px; 
-    border-radius: 3px; 
+             :root {
+    --global-font-size: 15px;
+    --page-width: 800px;
 }
+body { 
+    padding: 20px; 
+    max-width: var(--page-width); 
+    margin: auto; 
+    line-height: 1.6; 
+    background: #111; /* Forces a dark terminal background */
+    color: #eee;
+}
+#logo { color: #15f4ee; text-shadow: 0 0 8px #15f4ee; font-weight: bold; }
+.terminal-card { border: 1px solid #444; padding: 20px; margin: 20px 0; border-radius: 5px; background: #1a1a1a; }
+
+/* THIS FIXES THE BLACK BOXES */
+code { 
+    background: #222 !important; 
+    color: #ffca28 !important; 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    font-family: 'Courier New', monospace;
+    border: 1px solid #444;
+}
+
+h2, h3 { color: #15f4ee; border-bottom: 1px dashed #444; padding-bottom: 5px; margin-top: 30px; }
+.rule-box { border-left: 4px solid #ff5252; padding-left: 15px; background: rgba(255, 82, 82, 0.1); }
+strong { color: #fff; }
+ul { list-style-type: "— "; }
     </style>
 </head>
 <body class="terminal">
