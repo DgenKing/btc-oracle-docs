@@ -1,143 +1,276 @@
-# 🔮 BTC Oracle Terminal: The Definitive User Guide
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔮 BTC Oracle Terminal – Definitive User Guide v0.5.0</title>
+  <style>
+    :root {
+      --bg: #0f0f17;
+      --text: #e0e0ff;
+      --accent: #00d4ff;
+      --accent-dark: #0099cc;
+      --card: #1a1a2e;
+      --border: #333366;
+      --green: #00ff9d;
+      --red: #ff4d6a;
+      --purple: #c678dd;
+    }
 
-Welcome to the **BTC Oracle Terminal** — a disciplined, systematic trading framework designed for high-probability Bitcoin setups. This is **not** a gambling tool. It enforces structural market bias, real-time technical signals, AI-powered sentiment, and strict risk rules to filter noise and deliver only quality trades.
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-The terminal is fully hosted — just open the link in your browser (desktop or mobile). No installation required.
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px 12px;
+    }
 
----
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
 
-## 🛠️ Command Directory (All 13 Commands)
+    header {
+      text-align: center;
+      padding: 2.5rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
 
-### 1. Market Analysis Commands
-- **price**  
-  Fetches live BTC/USD price + 24h change from CoinGecko.
-- **bias**  
-  Compares current price to Monday 00:00 UTC open.  
-  → Above = **BULLISH** weekly bias  
-  → Below = **BEARISH** weekly bias
-- **rsi**  
-  14-period Relative Strength Index (daily timeframe).  
-  → < 30: Oversold (potential bounce)  
-  → > 70: Overbought (potential reversal)
-- **gaps**  
-  Lists unfilled CME Bitcoin futures gaps (price magnets that fill ~90% of the time).
-- **sentiment**  
-  Current Crypto Fear & Greed Index.  
-  → < 20: Extreme Fear → long opportunities  
-  → > 80: Extreme Greed → caution / short exits
-- **analyze <text>**  
-  Paste any social media post, news headline, or tweet. AI classifies it as **BULLISH**, **BEARISH**, or **NOISE/COPE**.
-- **ask <question>**  
-  Ask the AI anything. The model automatically receives live price, RSI, bias, and sentiment for context-aware answers.
+    h1 {
+      font-size: 2.6rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
 
-### 2. Execution & Risk Commands
-- **play**  
-  Full system scan. Aggregates bias, RSI, sentiment, and gaps into an **Oracle Report Card** with a clear verdict: **LONG**, **SHORT**, or **NO TRADE** + confidence %.
-- **calc <entry> <stop> [target]**  
-  Checks your trade setup against **The Bouncer**.  
-  Mandatory rule: **Reward:Risk must be ≥ 6:1** or the trade is **REJECTED**.  
-  Example: `calc 65000 64500 68500`
-- **size <risk%> <entry> <stop>**  
-  Calculates exact position size in BTC based on your account balance and chosen risk %. Uses the account size saved in **settings**.
+    .tagline {
+      font-size: 1.2rem;
+      color: #a0a0ff;
+      margin-bottom: 1rem;
+    }
 
-### 3. Utility & Navigation Commands
-- **settings**  
-  Set or update your account balance (in USD) for accurate position sizing. Value is saved in your browser (localStorage).
-- **help**  
-  Displays the full visual command grid.
-- **clear**  
-  Wipes the terminal log history.
+    h2 {
+      color: var(--accent);
+      font-size: 1.9rem;
+      margin: 2.5rem 0 1.2rem;
+      border-left: 5px solid var(--accent-dark);
+      padding-left: 14px;
+    }
 
----
+    h3 {
+      color: #d4d4ff;
+      font-size: 1.45rem;
+      margin: 2rem 0 0.9rem;
+    }
 
-## 🎮 How to Use the Terminal (UX/UI Guide)
+    section.intro {
+      background: var(--card);
+      padding: 1.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
 
-### Desktop Experience
-1. **Input**: Type commands in the glowing input bar at the bottom.
-2. **Execute**: Press **Enter**.
-3. **Command History**: Use **↑ / ↓ arrow keys** to cycle through previous commands.
-4. **Scrolling**: The log auto-scrolls to new outputs. When you run **help**, it intelligently scrolls to the top of the help section for easy reading.
+    .emoji-lg {
+      font-size: 1.7em;
+      margin-right: 0.4em;
+      vertical-align: middle;
+    }
 
-### Mobile Experience
-1. **Input**: Tap the input bar at the bottom to type.
-2. **Quick Command Grid** (12 buttons at the very bottom):
-   - **One-tap buttons**: price, bias, rsi, gaps, sentiment, play, help, clear → instantly run the command.
-   - **Pre-fill buttons**: calc, size, analyze, ask → insert the command template so you only need to add parameters.
-3. The grid stays fixed at the bottom for fast access without scrolling.
+    ul, ol {
+      margin: 1rem 0 1rem 1.8rem;
+    }
 
-### Visual Feedback
-- **Green** text: Bullish / success / approved
-- **Red/Alert** text: Bearish / danger / rejected
-- **Amber** text: System messages / processing
-- **Loading**: "[SYSTEM]: PROCESSING..." with pulse animation while fetching data or AI responses.
+    li {
+      margin-bottom: 0.5rem;
+    }
 
----
+    code {
+      background: #222244;
+      color: var(--accent);
+      padding: 0.18em 0.42em;
+      border-radius: 5px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.96em;
+    }
 
-## 📖 Step-by-Step: How to Find and Take a Trade
+    strong {
+      color: #ffffff;
+    }
 
-### Step 1: Establish Weekly Bias (Monday Morning)
-Run: `bias`  
-→ This is your anchor for the entire week.  
-**Rule**: Only trade in the direction of the bias unless RSI is extreme (>80 for shorts in bull bias, <20 for longs in bear bias).
+    .command {
+      background: #0d1b33;
+      border-left: 4px solid var(--purple);
+      padding: 0.9rem 1.3rem;
+      margin: 1.1rem 0;
+      border-radius: 6px;
+      font-family: monospace;
+    }
 
-### Step 2: Check Price Magnets
-Run: `gaps`  
-→ Look for unfilled CME gaps. Price is strongly attracted to fill them.
+    .command-name {
+      color: var(--green);
+      font-weight: bold;
+      margin-right: 0.6em;
+    }
 
-### Step 3: Get Full System Verdict
-Run: `play`  
-→ Read the **Oracle Report Card**.  
-Only proceed if confidence > 75% and verdict is LONG or SHORT.
+    .rule {
+      background: rgba(255, 77, 106, 0.12);
+      border-left: 4px solid var(--red);
+      padding: 1rem 1.4rem;
+      margin: 1.3rem 0;
+      border-radius: 6px;
+    }
 
-### Step 4: Validate Risk (The Bouncer)
-Plan your levels, then run:  
-`calc <entry> <stop> <target>`  
-→ If **APPROVED** (R:R ≥ 6:1) → proceed.  
-→ If **REJECTED** → adjust stop or target until approved.
+    .tip-box {
+      background: rgba(0, 212, 255, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 1.1rem 1.4rem;
+      margin: 1.4rem 0;
+      border-radius: 6px;
+    }
 
-### Step 5: Size the Position
-First ensure your account balance is set: `settings`  
-Then run:  
-`size 1 65000 64500` (example: risk 1% of account)
+    .final-quote {
+      text-align: center;
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--accent);
+      margin: 3.5rem 0 2rem;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
 
-### Step 6: Execute & Manage
-- Enter the trade on your exchange.
-- Never hold over weekend → close by Friday NY close.
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem 0;
+      color: #777799;
+      font-size: 0.95rem;
+      border-top: 1px solid var(--border);
+    }
 
----
+    @media (max-width: 680px) {
+      h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.65rem; }
+      .container { padding: 0 8px; }
+    }
+  </style>
+</head>
+<body>
 
-## 📈 Core Strategy: "Monday-Tuesday Quality Trade" (1 Trade Per Week)
+<div class="container">
 
-**Goal**: Maximum discipline, minimum screen time.
+  <header>
+    <h1><span class="emoji-lg">🔮</span> BTC Oracle Terminal</h1>
+    <div class="tagline">The Definitive User Guide <strong>v0.5.0</strong></div>
+  </header>
 
-1. **Sunday/Monday — Wait**  
-   Do nothing Sunday night. Let CME open Monday 00:00 UTC to set the weekly anchor price.
+  <section class="intro">
+    <p>
+      Welcome to the <strong>BTC Oracle Terminal</strong> — a professional, high-precision trading workstation designed to enforce your <strong>4-Pillar Trading Framework</strong>.<br>
+      This terminal is built for one purpose: to filter out noise and identify high-probability institutional setups using real-time Bybit data.
+    </p>
+  </section>
 
-2. **Tuesday — Confirmation**  
-   Run `bias`.  
-   → Price above Monday open → look for **LONGS** only  
-   → Price below Monday open → look for **SHORTS** only
+  <h2><span class="emoji-lg">📈</span> The 4-Pillar Strategy</h2>
 
-3. **Wait for Retrace**  
-   Watch for price to retrace/touch the Monday open level again.
+  <p>The Oracle evaluates every trade against four mandatory pillars of confluence. If all four don't align, the <strong>"Bouncer"</strong> will reject the trade.</p>
 
-4. **Confluence Check** (when price touches Monday open):
-   - Run `rsi` → ideal 40–50 for longs, 50–60 for shorts
-   - Run `play` → need >75% confidence
-   - Build a 6:1 R:R setup and validate with `calc`
+  <h3>Pillar 1: Weekly Bias (The Gatekeeper)</h3>
+  <p>We do not look at Monday's open. We look at the <strong>Previous Week's Candle Structure</strong>.</p>
+  <ul>
+    <li><strong>Bullish Bias</strong>: Previous weekly close is above the open.</li>
+    <li><strong>Bearish Bias</strong>: Previous weekly close is below the open.</li>
+    <li><strong>The Top Wick Rule</strong>: If the previous week's top wick is >2% of the price, <strong style="color:var(--red)">LONGS ARE BLOCKED</strong>. This indicates institutional selling pressure.</li>
+  </ul>
 
-5. **Enter** only when all checks pass.
+  <h3>Pillar 2: VPVR Brick Walls</h3>
+  <p>Using 180 days of volume data, the terminal identifies <strong>"Brick Walls"</strong> (High Volume Nodes).</p>
+  <ul>
+    <li><strong>Support Walls</strong>: HEAVY volume nodes below current price.</li>
+    <li><strong>Resistance Walls</strong>: HEAVY volume nodes above current price.</li>
+    <li>We only enter trades that have <strong>"room to run"</strong> between these walls.</li>
+  </ul>
 
-6. **Exit**  
-   - Primary: Hit your 6:1 target  
-   - Latest: Friday New York close (no weekend holds)
+  <h3>Pillar 3: CME Gaps</h3>
+  <p>Bitcoin price is a magnet for unfilled CME gaps.</p>
+  <ul>
+    <li>The terminal calculates the <strong>"Magnet Effect"</strong> based on proximity to these gaps.</li>
+    <li>You can manually set verified gaps using <code>setgap</code> to ensure the highest accuracy.</li>
+  </ul>
 
----
+  <h3>Pillar 4: Confirmation Signals (RSI & MACD)</h3>
+  <ul>
+    <li><strong>RSI (14)</strong>: Wilder's Smoothed RSI to detect overbought/oversold conditions.</li>
+    <li><strong>MACD (12, 26, 9)</strong>: Momentum histogram + signal line crosses.</li>
+    <li><strong>Divergence Engine</strong>: Automatically detects Bullish/Bearish divergences where price and momentum disagree.</li>
+  </ul>
 
-## 💡 Pro Tips
-- Use `ask` for clarification: e.g., `ask Why is the bias still bullish despite the drop?`
-- Paste wild Twitter takes into `analyze` to cut through hype.
-- Always start a new week with `clear` for a clean mental slate.
-- The terminal enforces discipline — if The Bouncer rejects your trade, walk away.
+  <h2><span class="emoji-lg">🛠️</span> Command Directory</h2>
 
-Structural discipline over hype. Trade like a machine. 🔮🚀
+  <h3>1. Core Analysis & Oracle</h3>
+  <div class="command"><span class="command-name">play</span> — The heart of the system. Runs the full 4-pillar scan and generates a <strong>Trade Analysis Report</strong> with a clear verdict and confidence score.</div>
+  <div class="command"><span class="command-name">backtest &lt;yyyy-mm-dd&gt;</span> — Reconstructs the market state for any past date and runs the Oracle analysis as if you were there.</div>
+  <div class="command"><span class="command-name">bias</span> — Detailed analysis of the previous weekly candle, including the Top Wick Rejection check.</div>
+  <div class="command"><span class="command-name">vpvr</span> / <span class="command-name">walls</span> — Displays the nearest Volume Brick Walls and your current "Zone" (Support/Resistance/Neutral).</div>
+
+  <h3>2. Technical Indicators</h3>
+  <div class="command"><span class="command-name">macd</span> — Shows MACD Line, Signal Line, Histogram, Cross Status, and Divergence.</div>
+  <div class="command"><span class="command-name">rsi</span> — Current 14-period RSI reading plus RSI Divergence status.</div>
+  <div class="command"><span class="command-name">ma</span> — Distance to key Moving Averages: <strong>50D, 100D, 200D, and 52W</strong>.</div>
+
+  <h3>3. CME Gap Management</h3>
+  <div class="command"><span class="command-name">gaps</span> — Show currently active unfilled CME gaps and their magnet strength.</div>
+  <div class="command"><span class="command-name">setgap &lt;low&gt; &lt;high&gt;</span> — Manually input a verified gap from your charts (saved to local storage).</div>
+  <div class="command"><span class="command-name">cleargaps</span> — Clear all manual gaps and revert to system defaults.</div>
+
+  <h3>4. Risk Management (The Bouncer)</h3>
+  <div class="command"><span class="command-name">calc &lt;entry&gt; &lt;stop&gt; [target]</span> — <strong>Rule: R:R must be ≥ 6:1</strong>. If it's lower, the Bouncer REJECTS the trade.</div>
+  <div class="command"><span class="command-name">size &lt;risk%&gt; &lt;entry&gt; &lt;stop&gt;</span> — Calculates exact position size based on your account balance.</div>
+  <div class="command"><span class="command-name">time</span> — Checks the UTC "Time Gate." <strong>No new entries allowed after Wednesday.</strong></div>
+
+  <h3>5. Market Pulse & AI</h3>
+  <div class="command"><span class="command-name">funding</span> / <span class="command-name">oi</span> / <span class="command-name">lsratio</span> — Real-time futures positioning data from Bybit.</div>
+  <div class="command"><span class="command-name">sentiment</span> / <span class="command-name">analyze &lt;text&gt;</span> / <span class="command-name">ask &lt;question&gt;</span> — AI-powered social sentiment and deep analysis via DeepSeek.</div>
+
+  <h2><span class="emoji-lg">⚖️</span> System Rules (Hard-Coded Enforcement)</h2>
+
+  <p>The Oracle terminal doesn't just suggest; it <strong>enforces</strong> your trading rules:</p>
+
+  <div class="rule">1. <strong>Weekly Bias Rule</strong>: If a Top Wick Rejection is detected, the <code>play</code> command will block all LONG verdicts.</div>
+  <div class="rule">2. <strong>The Bouncer Rule</strong>: All trades must have a minimum <strong>6:1 Reward-to-Risk ratio</strong>. The Oracle uses VPVR walls to calculate this automatically during the <code>play</code> command.</div>
+  <div class="rule">3. <strong>The Time Gate</strong>: No new entries are permitted from Thursday to Sunday. This prevents "over-trading" and catching end-of-week reversals.</div>
+  <div class="rule">4. <strong>Friday Exit</strong>: On Fridays, the <code>play</code> command will issue a mandatory reminder to close all positions before the weekend.</div>
+
+  <h2><span class="emoji-lg">🎮</span> Pro Tips</h2>
+
+  <div class="tip-box">
+    <strong>Desktop</strong>: Use <strong>↑ / ↓ arrow keys</strong> to cycle through your command history.
+  </div>
+  <div class="tip-box">
+    <strong>Mobile</strong>: Use the <strong>Quick Buttons</strong> at the bottom for one-tap analysis. Use the <strong>BACKTEST</strong> button to quickly check historical dates.
+  </div>
+  <div class="tip-box">
+    <strong>Precision</strong>: Always run <code>vpvr</code> before <code>calc</code> to find your logical stop-loss and take-profit levels.
+  </div>
+
+  <div class="final-quote">
+    <strong>Structural Discipline Over Hype.<br>Trade the system, not the candle.</strong><br>🔮🚀
+  </div>
+
+  <footer>
+    BTC Oracle Terminal • User Guide v0.5.0 • For educational & personal use
+  </footer>
+
+</div>
+
+</body>
+</html>
