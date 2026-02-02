@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="terminal">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔮 BTC Oracle Terminal – Definitive User Guide v0.5.0</title>
+  <title>🔮 BTC ORACLE TERMINAL v0.5.0 – ACCESS GRANTED</title>
   <style>
     :root {
-      --bg: #0f0f17;
-      --text: #e0e0ff;
-      --accent: #00d4ff;
-      --accent-dark: #0099cc;
-      --card: #1a1a2e;
-      --border: #333366;
+      --bg: #0a0e14;
+      --text: #d8dee9;
+      --accent: #00eaff;       /* neon cyan */
+      --accent-glow: #00ffff33;
       --green: #00ff9d;
-      --red: #ff4d6a;
+      --red: #ff2e63;
       --purple: #c678dd;
+      --border: #1e2a44;
+      --card: #11151f;
+      --glow: 0 0 12px var(--accent-glow), 0 0 24px var(--accent-glow);
     }
 
     * {
@@ -24,143 +25,173 @@
     }
 
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-family: 'Courier New', 'Consolas', 'Menlo', monospace;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      padding: 20px 12px;
+      line-height: 1.45;
+      padding: 1.5rem 1rem;
+      background-image: 
+        radial-gradient(circle at 10% 20%, #00112222 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, #00112222 0%, transparent 30%);
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 980px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     header {
       text-align: center;
-      padding: 2.5rem 0 2rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 2.5rem;
+      padding: 3rem 0 2rem;
+      border-bottom: 1px dashed var(--border);
+      margin-bottom: 3rem;
+      text-shadow: var(--glow);
     }
 
     h1 {
-      font-size: 2.6rem;
+      font-size: 3.2rem;
       color: var(--accent);
-      margin-bottom: 0.6rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      animation: flicker 4s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: var(--glow); }
+      20%, 24%, 55% { opacity: 0.7; text-shadow: none; }
     }
 
     .tagline {
-      font-size: 1.2rem;
-      color: #a0a0ff;
-      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      color: #88c0d0;
+      opacity: 0.9;
     }
 
     h2 {
       color: var(--accent);
-      font-size: 1.9rem;
-      margin: 2.5rem 0 1.2rem;
-      border-left: 5px solid var(--accent-dark);
-      padding-left: 14px;
+      font-size: 2.1rem;
+      margin: 3rem 0 1.2rem;
+      border-left: 6px solid var(--purple);
+      padding-left: 1rem;
+      text-shadow: 0 0 8px var(--purple);
     }
 
     h3 {
-      color: #d4d4ff;
-      font-size: 1.45rem;
-      margin: 2rem 0 0.9rem;
+      color: var(--green);
+      font-size: 1.6rem;
+      margin: 2.2rem 0 0.8rem;
     }
 
     section.intro {
       background: var(--card);
-      padding: 1.8rem;
-      border-radius: 10px;
+      padding: 2rem;
       border: 1px solid var(--border);
-      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: inset 0 0 20px #00000055;
+      margin-bottom: 2.5rem;
     }
 
     .emoji-lg {
-      font-size: 1.7em;
-      margin-right: 0.4em;
-      vertical-align: middle;
+      font-size: 1.8em;
+      margin-right: 0.5em;
     }
 
-    ul, ol {
-      margin: 1rem 0 1rem 1.8rem;
+    ul {
+      list-style: none;
+      margin: 1rem 0 1rem 1.5rem;
     }
 
-    li {
-      margin-bottom: 0.5rem;
+    ul li:before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.8rem;
+      font-weight: bold;
     }
 
     code {
-      background: #222244;
+      background: #0d1421;
       color: var(--accent);
-      padding: 0.18em 0.42em;
-      border-radius: 5px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 0.96em;
+      padding: 0.25em 0.5em;
+      border-radius: 4px;
+      border: 1px solid #1e2a44;
+      font-family: inherit;
     }
 
     strong {
       color: #ffffff;
+      text-shadow: 0 0 6px #ffffff88;
     }
 
     .command {
-      background: #0d1b33;
-      border-left: 4px solid var(--purple);
-      padding: 0.9rem 1.3rem;
-      margin: 1.1rem 0;
+      background: #0b111a;
+      border-left: 5px solid var(--purple);
+      padding: 1.1rem 1.5rem;
+      margin: 1.3rem 0;
       border-radius: 6px;
-      font-family: monospace;
+      box-shadow: inset 0 2px 10px #00000066;
+      position: relative;
     }
 
     .command-name {
       color: var(--green);
       font-weight: bold;
-      margin-right: 0.6em;
+      font-size: 1.15em;
+    }
+
+    .command::before {
+      content: "$ ";
+      color: var(--green);
+      opacity: 0.7;
+      position: absolute;
+      left: 0.8rem;
+      top: 1.1rem;
     }
 
     .rule {
-      background: rgba(255, 77, 106, 0.12);
-      border-left: 4px solid var(--red);
-      padding: 1rem 1.4rem;
-      margin: 1.3rem 0;
+      background: rgba(255, 46, 99, 0.12);
+      border-left: 5px solid var(--red);
+      padding: 1.2rem 1.6rem;
+      margin: 1.5rem 0;
       border-radius: 6px;
+      box-shadow: 0 0 15px rgba(255, 46, 99, 0.15);
     }
 
     .tip-box {
-      background: rgba(0, 212, 255, 0.08);
-      border-left: 4px solid var(--accent);
-      padding: 1.1rem 1.4rem;
-      margin: 1.4rem 0;
+      background: rgba(0, 234, 255, 0.08);
+      border-left: 5px solid var(--accent);
+      padding: 1.3rem 1.6rem;
+      margin: 1.6rem 0;
       border-radius: 6px;
+      box-shadow: 0 0 18px rgba(0, 234, 255, 0.12);
     }
 
     .final-quote {
       text-align: center;
-      font-size: 1.35rem;
+      font-size: 1.6rem;
       font-style: italic;
       color: var(--accent);
-      margin: 3.5rem 0 2rem;
-      padding: 1.5rem;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      margin: 4rem 0 3rem;
+      padding: 2rem;
+      border-top: 1px dashed var(--border);
+      border-bottom: 1px dashed var(--border);
+      text-shadow: var(--glow);
     }
 
     footer {
       text-align: center;
-      margin-top: 4rem;
+      margin-top: 5rem;
       padding: 2rem 0;
-      color: #777799;
+      color: #4c566a;
       font-size: 0.95rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px dashed var(--border);
     }
 
-    @media (max-width: 680px) {
-      h1 { font-size: 2.1rem; }
-      h2 { font-size: 1.65rem; }
-      .container { padding: 0 8px; }
+    @media (max-width: 720px) {
+      h1 { font-size: 2.4rem; }
+      h2 { font-size: 1.8rem; }
+      .container { padding: 0 0.8rem; }
     }
   </style>
 </head>
@@ -169,105 +200,94 @@
 <div class="container">
 
   <header>
-    <h1><span class="emoji-lg">🔮</span> BTC Oracle Terminal</h1>
-    <div class="tagline">The Definitive User Guide <strong>v0.5.0</strong></div>
+    <h1>🔮 BTC ORACLE TERMINAL</h1>
+    <div class="tagline">v0.5.0 – HIGH-PROBABILITY INSTITUTIONAL SETUPS – ACCESS GRANTED</div>
   </header>
 
   <section class="intro">
-    <p>
-      Welcome to the <strong>BTC Oracle Terminal</strong> — a professional, high-precision trading workstation designed to enforce your <strong>4-Pillar Trading Framework</strong>.<br>
-      This terminal is built for one purpose: to filter out noise and identify high-probability institutional setups using real-time Bybit data.
-    </p>
+    <p>Welcome, operator.<br>
+    This terminal enforces the <strong>4-Pillar Framework</strong>. Noise filtered. Only confluence allowed.<br>
+    Real-time Bybit feed. Structural discipline. No hype. Execute or exit.</p>
   </section>
 
-  <h2><span class="emoji-lg">📈</span> The 4-Pillar Strategy</h2>
+  <h2>📈 PILLAR ARCHITECTURE</h2>
 
-  <p>The Oracle evaluates every trade against four mandatory pillars of confluence. If all four don't align, the <strong>"Bouncer"</strong> will reject the trade.</p>
+  <p>All four pillars required. Bouncer rejects partial alignment.</p>
 
-  <h3>Pillar 1: Weekly Bias (The Gatekeeper)</h3>
-  <p>We do not look at Monday's open. We look at the <strong>Previous Week's Candle Structure</strong>.</p>
+  <h3>Pillar 1 – WEEKLY BIAS [GATEKEEPER]</h3>
   <ul>
-    <li><strong>Bullish Bias</strong>: Previous weekly close is above the open.</li>
-    <li><strong>Bearish Bias</strong>: Previous weekly close is below the open.</li>
-    <li><strong>The Top Wick Rule</strong>: If the previous week's top wick is >2% of the price, <strong style="color:var(--red)">LONGS ARE BLOCKED</strong>. This indicates institutional selling pressure.</li>
+    <li>Bullish: Prev weekly close > open</li>
+    <li>Bearish: Prev weekly close < open</li>
+    <li><strong>Top Wick Rejection</strong>: Top wick > 2% → <span style="color:var(--red)">LONGS BLOCKED</span> (institutional dump detected)</li>
   </ul>
 
-  <h3>Pillar 2: VPVR Brick Walls</h3>
-  <p>Using 180 days of volume data, the terminal identifies <strong>"Brick Walls"</strong> (High Volume Nodes).</p>
+  <h3>Pillar 2 – VPVR BRICK WALLS</h3>
   <ul>
-    <li><strong>Support Walls</strong>: HEAVY volume nodes below current price.</li>
-    <li><strong>Resistance Walls</strong>: HEAVY volume nodes above current price.</li>
-    <li>We only enter trades that have <strong>"room to run"</strong> between these walls.</li>
+    <li>Support: Heavy volume nodes below price</li>
+    <li>Resistance: Heavy volume nodes above price</li>
+    <li>Only trade with clear "room to run" between walls</li>
   </ul>
 
-  <h3>Pillar 3: CME Gaps</h3>
-  <p>Bitcoin price is a magnet for unfilled CME gaps.</p>
+  <h3>Pillar 3 – CME GAP MAGNETS</h3>
   <ul>
-    <li>The terminal calculates the <strong>"Magnet Effect"</strong> based on proximity to these gaps.</li>
-    <li>You can manually set verified gaps using <code>setgap</code> to ensure the highest accuracy.</li>
+    <li>Price pulled to unfilled gaps</li>
+    <li><code>setgap</code> → manual verified input (highest precision)</li>
   </ul>
 
-  <h3>Pillar 4: Confirmation Signals (RSI & MACD)</h3>
+  <h3>Pillar 4 – MOMENTUM CONFIRMATION</h3>
   <ul>
-    <li><strong>RSI (14)</strong>: Wilder's Smoothed RSI to detect overbought/oversold conditions.</li>
-    <li><strong>MACD (12, 26, 9)</strong>: Momentum histogram + signal line crosses.</li>
-    <li><strong>Divergence Engine</strong>: Automatically detects Bullish/Bearish divergences where price and momentum disagree.</li>
+    <li>RSI 14 (Wilder) – OB/OS + divergence</li>
+    <li>MACD 12,26,9 – hist + cross + divergence engine</li>
   </ul>
 
-  <h2><span class="emoji-lg">🛠️</span> Command Directory</h2>
+  <h2>🛠️ COMMAND MATRIX</h2>
 
-  <h3>1. Core Analysis & Oracle</h3>
-  <div class="command"><span class="command-name">play</span> — The heart of the system. Runs the full 4-pillar scan and generates a <strong>Trade Analysis Report</strong> with a clear verdict and confidence score.</div>
-  <div class="command"><span class="command-name">backtest &lt;yyyy-mm-dd&gt;</span> — Reconstructs the market state for any past date and runs the Oracle analysis as if you were there.</div>
-  <div class="command"><span class="command-name">bias</span> — Detailed analysis of the previous weekly candle, including the Top Wick Rejection check.</div>
-  <div class="command"><span class="command-name">vpvr</span> / <span class="command-name">walls</span> — Displays the nearest Volume Brick Walls and your current "Zone" (Support/Resistance/Neutral).</div>
+  <h3>1. CORE ORACLE</h3>
+  <div class="command"><span class="command-name">play</span> → Full 4-pillar scan → Trade Report + Verdict + Confidence</div>
+  <div class="command"><span class="command-name">backtest YYYY-MM-DD</span> → Historical state reconstruction</div>
+  <div class="command"><span class="command-name">bias</span> → Previous weekly candle + Top Wick check</div>
+  <div class="command"><span class="command-name">vpvr</span> / <span class="command-name">walls</span> → Nearest HVNs + current zone</div>
 
-  <h3>2. Technical Indicators</h3>
-  <div class="command"><span class="command-name">macd</span> — Shows MACD Line, Signal Line, Histogram, Cross Status, and Divergence.</div>
-  <div class="command"><span class="command-name">rsi</span> — Current 14-period RSI reading plus RSI Divergence status.</div>
-  <div class="command"><span class="command-name">ma</span> — Distance to key Moving Averages: <strong>50D, 100D, 200D, and 52W</strong>.</div>
+  <h3>2. INDICATORS</h3>
+  <div class="command"><span class="command-name">macd</span> → Line / Signal / Hist / Cross / Divergence</div>
+  <div class="command"><span class="command-name">rsi</span> → Current + Divergence status</div>
+  <div class="command"><span class="command-name">ma</span> → Distance: 50D / 100D / 200D / 52W</div>
 
-  <h3>3. CME Gap Management</h3>
-  <div class="command"><span class="command-name">gaps</span> — Show currently active unfilled CME gaps and their magnet strength.</div>
-  <div class="command"><span class="command-name">setgap &lt;low&gt; &lt;high&gt;</span> — Manually input a verified gap from your charts (saved to local storage).</div>
-  <div class="command"><span class="command-name">cleargaps</span> — Clear all manual gaps and revert to system defaults.</div>
+  <h3>3. GAP CONTROL</h3>
+  <div class="command"><span class="command-name">gaps</span> → Active unfilled + magnet strength</div>
+  <div class="command"><span class="command-name">setgap low high</span> → Manual gap entry</div>
+  <div class="command"><span class="command-name">cleargaps</span> → Reset to defaults</div>
 
-  <h3>4. Risk Management (The Bouncer)</h3>
-  <div class="command"><span class="command-name">calc &lt;entry&gt; &lt;stop&gt; [target]</span> — <strong>Rule: R:R must be ≥ 6:1</strong>. If it's lower, the Bouncer REJECTS the trade.</div>
-  <div class="command"><span class="command-name">size &lt;risk%&gt; &lt;entry&gt; &lt;stop&gt;</span> — Calculates exact position size based on your account balance.</div>
-  <div class="command"><span class="command-name">time</span> — Checks the UTC "Time Gate." <strong>No new entries allowed after Wednesday.</strong></div>
+  <h3>4. RISK / BOUNCER</h3>
+  <div class="command"><span class="command-name">calc entry stop [target]</span> → R:R ≥ 6:1 or REJECTED</div>
+  <div class="command"><span class="command-name">size risk% entry stop</span> → Position sizing from balance</div>
+  <div class="command"><span class="command-name">time</span> → UTC Time Gate check (no entries Thu–Sun)</div>
 
-  <h3>5. Market Pulse & AI</h3>
-  <div class="command"><span class="command-name">funding</span> / <span class="command-name">oi</span> / <span class="command-name">lsratio</span> — Real-time futures positioning data from Bybit.</div>
-  <div class="command"><span class="command-name">sentiment</span> / <span class="command-name">analyze &lt;text&gt;</span> / <span class="command-name">ask &lt;question&gt;</span> — AI-powered social sentiment and deep analysis via DeepSeek.</div>
+  <h3>5. PULSE + AI</h3>
+  <div class="command"><span class="command-name">funding</span> / <span class="command-name">oi</span> / <span class="command-name">lsratio</span> → Bybit futures data</div>
+  <div class="command"><span class="command-name">sentiment</span> / <span class="command-name">analyze text</span> / <span class="command-name">ask question</span> → DeepSeek AI layer</div>
 
-  <h2><span class="emoji-lg">⚖️</span> System Rules (Hard-Coded Enforcement)</h2>
+  <h2>⚖️ HARD-CODED ENFORCEMENT</h2>
 
-  <p>The Oracle terminal doesn't just suggest; it <strong>enforces</strong> your trading rules:</p>
+  <div class="rule">1. Top Wick Rejection → <code>play</code> blocks LONGS</div>
+  <div class="rule">2. Minimum 6:1 R:R (auto via VPVR) or Bouncer REJECTS</div>
+  <div class="rule">3. Time Gate: No entries Thursday–Sunday</div>
+  <div class="rule">4. Friday → Mandatory close reminder on <code>play</code></div>
 
-  <div class="rule">1. <strong>Weekly Bias Rule</strong>: If a Top Wick Rejection is detected, the <code>play</code> command will block all LONG verdicts.</div>
-  <div class="rule">2. <strong>The Bouncer Rule</strong>: All trades must have a minimum <strong>6:1 Reward-to-Risk ratio</strong>. The Oracle uses VPVR walls to calculate this automatically during the <code>play</code> command.</div>
-  <div class="rule">3. <strong>The Time Gate</strong>: No new entries are permitted from Thursday to Sunday. This prevents "over-trading" and catching end-of-week reversals.</div>
-  <div class="rule">4. <strong>Friday Exit</strong>: On Fridays, the <code>play</code> command will issue a mandatory reminder to close all positions before the weekend.</div>
+  <h2>🎮 OPERATOR TIPS</h2>
 
-  <h2><span class="emoji-lg">🎮</span> Pro Tips</h2>
-
-  <div class="tip-box">
-    <strong>Desktop</strong>: Use <strong>↑ / ↓ arrow keys</strong> to cycle through your command history.
-  </div>
-  <div class="tip-box">
-    <strong>Mobile</strong>: Use the <strong>Quick Buttons</strong> at the bottom for one-tap analysis. Use the <strong>BACKTEST</strong> button to quickly check historical dates.
-  </div>
-  <div class="tip-box">
-    <strong>Precision</strong>: Always run <code>vpvr</code> before <code>calc</code> to find your logical stop-loss and take-profit levels.
-  </div>
+  <div class="tip-box"><strong>Desktop</strong>: ↑ ↓ arrows → command history</div>
+  <div class="tip-box"><strong>Mobile</strong>: Quick Buttons + BACKTEST shortcut</div>
+  <div class="tip-box"><strong>Precision</strong>: Always <code>vpvr</code> before <code>calc</code> for stops/targets</div>
 
   <div class="final-quote">
-    <strong>Structural Discipline Over Hype.<br>Trade the system, not the candle.</strong><br>🔮🚀
+    STRUCTURAL DISCIPLINE OVER HYPE<br>
+    TRADE THE SYSTEM – NOT THE CANDLE<br>
+    🔮🚀
   </div>
 
   <footer>
-    BTC Oracle Terminal • User Guide v0.5.0 • For educational & personal use
+    BTC ORACLE TERMINAL • v0.5.0 • Deployed on GitHub Pages • Stay cold. Stay sharp.
   </footer>
 
 </div>
